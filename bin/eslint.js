@@ -115,7 +115,7 @@ ${message}`);
 // Execution
 //------------------------------------------------------------------------------
 
-(async function main() {
+async function main() {
     process.on("uncaughtException", onFatalError);
     process.on("unhandledRejection", onFatalError);
 
@@ -137,4 +137,8 @@ ${message}`);
         process.argv.includes("--stdin") ? await readStdin() : null,
         true
     );
-}()).catch(onFatalError);
+};
+
+globalThis.runEslintMainFn = function() {
+    main().catch(onFatalError);
+};
